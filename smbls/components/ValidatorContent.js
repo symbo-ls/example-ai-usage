@@ -1,5 +1,5 @@
 export const ValidatorContent = {
-  extend: 'Flex',
+  extends: 'Flex',
   props: {
     width: '100%',
     flow: 'y',

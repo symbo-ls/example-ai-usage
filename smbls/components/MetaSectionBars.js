@@ -36,7 +36,7 @@ export const MetaSectionBars = {
           mixBlendMode: 'luminosity',
         },
         childExtends: {
-          extend: 'TooltipParent',
+          extends: 'TooltipParent',
           TooltipHidden: {
             fontSize: 'Z',
             whiteSpace: 'nowrap',

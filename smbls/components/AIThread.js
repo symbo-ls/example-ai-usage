@@ -1,5 +1,5 @@
 export const AIThread = {
-  extend: 'Flex',
+  extends: 'Flex',
   props: {
     padding: 'A1',
     width: '100%',
@@ -17,7 +17,7 @@ export const AIThread = {
     children: (el, s) => s.thread,
     childrenAs: 'state',
   },
-  childExtend: {
+  childExtends: {
     props: (el, s) => ({
         alignSelf: s.role === 'user' ? 'start' : 'end',
         ':first-child': {
@@ -39,7 +39,7 @@ export const AIThread = {
     content: (el, s) => {
         if (s.role === 'user') {
           return {
-            extend: 'AIMessage',
+            extends: 'AIMessage',
             props: {
               contentEditable: false,
               shape: 'bubble',
@@ -58,7 +58,7 @@ export const AIThread = {
         }
 
         return {
-          extend: 'P',
+          extends: 'P',
           props: {
             color: 'paragraph',
             maxWidth: 'I1'

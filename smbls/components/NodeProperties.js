@@ -1,5 +1,5 @@
 export const NodeProperties = {
-  extend: 'Flex',
+  extends: 'Flex',
   props: {
     flexFlow: 'y',
     borderWidth: '0 0 0 2px',

@@ -1,12 +1,10 @@
 export const CaptionTitle = {
-  extend: 'Flex',
-  props: {
-    align: 'center',
-    color: 'disabled',
-    fontSize: 'Y',
-    textTransform: 'uppercase',
-  },
+  extends: "Flex",
+  align: "center",
+  color: "disabled",
+  fontSize: "Y",
+  textTransform: "uppercase",
   Text: {
-    text: 'Active Project',
+    text: "Active Project",
   },
 };

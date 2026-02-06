@@ -1,6 +1,6 @@
 export const PeerCountChart = {
   if: (_, s) => s.metricsData?.charts?.peer_count,
-  extend: 'Flex',
+  extends: 'Flex',
   props: {
     flow: 'y',
     gap: 'Y',

@@ -109,7 +109,7 @@ export const Asdasd = {
             s.keyword.length < 10 &&
             !s.thread.length,
         childExtends: {
-          extend: 'Button',
+          extends: 'Button',
           props: {
             theme: 'tertiary',
           },

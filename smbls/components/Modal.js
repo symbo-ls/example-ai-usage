@@ -44,7 +44,7 @@ export const Modal = {
     }),
   content: (el, s) => ({
       Box: s.root.modal && {
-        extend: s.root.modal,
+        extends: s.root.modal,
         props: {
           onClick: (ev) => ev.stopPropagation()
         }

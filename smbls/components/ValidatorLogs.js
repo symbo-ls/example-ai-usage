@@ -9,8 +9,8 @@ export const ValidatorLogs = {
         ev.preventDefault()
       },
   },
-  extend: 'Grid',
-  childExtend: 'LogItem',
+  extends: 'Grid',
+  childExtends: 'LogItem',
   RAM: {
     Title: {
       text: 'Client Version',

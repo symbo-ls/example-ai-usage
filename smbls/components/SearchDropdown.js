@@ -1,5 +1,5 @@
 export const SearchDropdown = {
-  extend: [
+  extends: [
     'Flex',
     'Dropdown',
   ],

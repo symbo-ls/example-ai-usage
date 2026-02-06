@@ -1,5 +1,5 @@
 export const NetworkRowLabel = {
-  extend: 'LabelTag',
+  extends: 'LabelTag',
   props: {
     color: 'white',
     theme: null,

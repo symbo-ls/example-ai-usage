@@ -1,5 +1,5 @@
 export const NetworkRow = {
-  extend: "Grid",
+  extends: "Grid",
   scope: {
     parseNetworkRow: function parseNetworkRow(data) {
       const result = {

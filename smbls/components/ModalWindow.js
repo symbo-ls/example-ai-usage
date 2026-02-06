@@ -1,5 +1,5 @@
 export const ModalWindow = {
-  extend: 'Flex',
+  extends: 'Flex',
   tag: 'field',
   props: {
     boxSize: 'fit-content',

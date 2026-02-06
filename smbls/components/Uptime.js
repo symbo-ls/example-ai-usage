@@ -1,5 +1,5 @@
 export const Uptime = {
-  extend: 'Flex',
+  extends: 'Flex',
   Flex: {
     maxWidth: '100%',
     childProps: {

@@ -1,5 +1,5 @@
 export const NavButton = {
-  extend: [
+  extends: [
     'Link',
     'Button',
   ],

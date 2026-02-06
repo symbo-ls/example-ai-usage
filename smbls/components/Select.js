@@ -1,6 +1,6 @@
 export const Select = {
   tag: 'label',
-  extend: 'Flex',
+  extends: 'Flex',
   props: {
     theme: 'transparent',
     position: 'relative',

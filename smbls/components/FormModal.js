@@ -1,5 +1,5 @@
 export const FormModal = {
-  extend: 'ModalWindow',
+  extends: 'ModalWindow',
   props: {
     maxHeight: '95dvh',
     overflow: 'hidden auto',

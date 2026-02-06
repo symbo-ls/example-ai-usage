@@ -1,13 +1,5 @@
-import { fetch as apiFetch } from "../functions/fetch.js";
-import { PeerCountChart } from "./PeerCountChart.js";
-import { LatestBlockChart } from "./LatestBlockChart.js";
-import { SyncingChart } from "./SyncingChart.js";
-import { BlocksToSyncChart } from "./BlocksToSyncChart.js";
-import { NetListeningChart } from "./NetListeningChart.js";
-import { UpChart } from "./UpChart.js";
-
 export const Graphs = {
-  extend: "Flex",
+  extends: "Flex",
   scope: {
     TIME_RANGES: [
       { label: "5m", value: 5 },
@@ -20,7 +12,7 @@ export const Graphs = {
       { label: "3d", value: 4320 },
       { label: "1w", value: 10080 },
     ],
-    fetchMetrics: (s, timeRange) => {
+    fetchMetrics: (el, s, timeRange) => {
       const networkName = (s.protocol || "").toLowerCase();
       const publicKey = s.public_key || "";
 
@@ -28,7 +20,8 @@ export const Graphs = {
 
       s.update({ metricsLoading: true });
 
-      apiFetch(
+      el.call(
+        "apiFetch",
         "POST",
         "",
         {
@@ -61,7 +54,7 @@ export const Graphs = {
     // Fetch metrics once when protocol and public_key are available
     if (!el.__metricsFetched && s.protocol && s.public_key) {
       el.__metricsFetched = true;
-      el.scope.fetchMetrics(s, s.timeRangeMinutes || 5);
+      el.scope.fetchMetrics(el, s, s.timeRangeMinutes || 5);
     }
 
     return {
@@ -83,7 +76,7 @@ export const Graphs = {
             canvas.node.__chart = null;
           }
         });
-        el.scope.fetchMetrics(s, s.timeRangeMinutes);
+        el.scope.fetchMetrics(el, s, s.timeRangeMinutes);
       }
     },
   },
@@ -146,34 +139,30 @@ export const Graphs = {
   },
 
   // Uptime grid - full width (first)
-  UpChart: { extend: UpChart, props: { order: "1" } },
+  UpChart: { order: "1" },
 
   // Row 1: Latest Block, Syncing, and Blocks To Sync
   Row1: {
     if: (_, s) => s.metricsData?.charts,
-    extend: "Flex",
-    props: {
-      flow: "x",
-      gap: "A",
-      order: "2",
-    },
+    extends: "Flex",
+    flow: "x",
+    gap: "A",
+    order: "2",
 
-    LatestBlockChart: { extend: LatestBlockChart, props: { flex: "1" } },
-    SyncingChart: { extend: SyncingChart, props: { flex: "1" } },
-    BlocksToSyncChart: { extend: BlocksToSyncChart, props: { flex: "1" } },
+    LatestBlockChart: { flex: "1" },
+    SyncingChart: { flex: "1" },
+    BlocksToSyncChart: { flex: "1" },
   },
 
   // Row 2: Peer Count and Net Listening
   Row2: {
     if: (_, s) => s.metricsData?.charts,
-    extend: "Flex",
-    props: {
-      flow: "x",
-      gap: "A",
-      order: "3",
-    },
+    extends: "Flex",
+    flow: "x",
+    gap: "A",
+    order: "3",
 
-    PeerCountChart: { extend: PeerCountChart, props: { flex: "1" } },
-    NetListeningChart: { extend: NetListeningChart, props: { flex: "1" } },
+    PeerCountChart: { flex: "1" },
+    NetListeningChart: { flex: "1" },
   },
 };

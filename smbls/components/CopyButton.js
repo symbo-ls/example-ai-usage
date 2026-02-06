@@ -1,5 +1,5 @@
 export const CopyButton = {
-  extend: 'IconButton',
+  extends: 'IconButton',
   props: {
     icon: 'copy outline',
     background: 'transparent',

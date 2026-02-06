@@ -1,5 +1,5 @@
 export const EditForm = {
-  extend: 'FormModal',
+  extends: 'FormModal',
   props: {
     gap: 'C',
     width: '80%',

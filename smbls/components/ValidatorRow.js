@@ -1,5 +1,5 @@
 export const ValidatorRow = {
-  extend: 'Link',
+  extends: 'Link',
   props: {
     flexFlow: 'x',
     gap: 'A2',

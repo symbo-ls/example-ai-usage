@@ -1,6 +1,6 @@
 export const LatestBlockChart = {
   if: (_, s) => s.metricsData?.charts?.latest_block,
-  extend: 'Flex',
+  extends: 'Flex',
   props: {
     flow: 'y',
     gap: 'Y',

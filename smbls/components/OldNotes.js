@@ -1,5 +1,5 @@
 export const OldNotes = {
-  extend: 'Flex',
+  extends: 'Flex',
   Flex: {
     flow: 'y',
     children: (el, s) => s.logs,

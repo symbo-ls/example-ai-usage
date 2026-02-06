@@ -1,5 +1,5 @@
 export const AIMessage = {
-  extend: [
+  extends: [
     'LabelTag',
     'Focusable',
   ],

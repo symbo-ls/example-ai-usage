@@ -1,6 +1,6 @@
 export const NetListeningChart = {
   if: (_, s) => s.metricsData?.charts?.net_listening,
-  extend: 'Flex',
+  extends: 'Flex',
   props: {
     flow: 'y',
     gap: 'Y',

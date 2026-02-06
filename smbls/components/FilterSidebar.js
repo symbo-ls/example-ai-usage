@@ -4,7 +4,7 @@ export const FilterSidebar = {
     flexFlow: 'x',
     flexAlign: 'center start',
   },
-  extend: 'DropdownParent',
+  extends: 'DropdownParent',
   Button: {
     text: (el, s) => s.isUpdate ? 'Updates' : 'All validators',
     theme: 'transparent',

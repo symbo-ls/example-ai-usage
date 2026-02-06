@@ -1,6 +1,6 @@
 export const BlocksToSyncChart = {
   if: (_, s) => s.metricsData?.charts?.blocks_to_sync,
-  extend: 'Flex',
+  extends: 'Flex',
   props: {
     flow: 'y',
     gap: 'Y',

@@ -1,5 +1,5 @@
 export const FieldCaption = {
-  extend: 'Flex',
+  extends: 'Flex',
   props: {
     flow: 'column',
     boxSize: 'fit-content fit-content',

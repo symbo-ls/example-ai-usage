@@ -15,7 +15,7 @@ export const ValidatorFooter = {
         ev.preventDefault()
       },
   },
-  extend: 'Flex',
+  extends: 'Flex',
   Edit: {
     icon: 'check',
     text: 'Edit',
@@ -26,5 +26,5 @@ export const ValidatorFooter = {
         })
       },
   },
-  childExtend: 'Button',
+  childExtends: 'Button',
 };

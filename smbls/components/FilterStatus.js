@@ -1,5 +1,5 @@
 export const FilterStatus = {
-  extend: 'Flex',
+  extends: 'Flex',
   Stable: {
     Box: {
       background: 'green',

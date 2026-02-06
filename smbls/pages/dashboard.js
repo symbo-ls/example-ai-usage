@@ -1,27 +1,25 @@
 import { getActiveNetworks, getInactiveNetworks } from '../components/Table.js'
 
 export const dashboard = {
-  extend: [
+  extends: [
     'Page',
   ],
-  "props": {
-            "width": "100%",
-            "padding": "X",
-            "flexFlow": "y",
-            "gap": "X",
-            "onRender": (el, s) => {
-                      window.requestAnimationFrame(async () => {
-                        const [fleet, chartData] = await Promise.all([
-                          el.call('read'),
-                          el.call('readShortSummary')
-                        ])
-                        el.call('setInitialData', {
-                          fleet,
-                          chartData
-                      })
-                  })
-                },
-            "Header": {},
+  width: '100%',
+  padding: 'X',
+  flexFlow: 'y',
+  gap: 'X',
+  onRender: (el, s) => {
+    window.requestAnimationFrame(async () => {
+      const [fleet, chartData] = await Promise.all([
+        el.call('read'),
+        el.call('readShortSummary')
+      ])
+      el.call('setInitialData', {
+        fleet,
+        chartData
+      })
+    })
+  },
             "Flex": {
                 "width": "100%",
                 "align": "stretch start",
@@ -59,182 +57,152 @@ export const dashboard = {
                             },
                             "FilterTags": {
                                 "if": (el, s) => s.filter,
-                                "extend": "Flex",
-                                "props": {
-                                    "flexAlign": "center",
-                                    "gap": "Z"
-                                },
+                                "extends": "Flex",
+                                "flexAlign": "center",
+                                "gap": "Z",
                                 "TypeTag": {
                                     "if": (el, s) => s.filter?.type,
-                                    "extend": "Flex",
-                                    "props": {
-                                        "flexAlign": "center",
-                                        "gap": "X2",
-                                        "padding": "X2 Z",
-                                        "background": "nodeType .2",
-                                        "round": "Z",
-                                        "fontSize": "Z1",
-                                        "color": "nodeType"
-                                    },
+                                    "extends": "Flex",
+                                    "flexAlign": "center",
+                                    "gap": "X2",
+                                    "padding": "X2 Z",
+                                    "background": "nodeType .2",
+                                    "round": "Z",
+                                    "fontSize": "Z1",
+                                    "color": "nodeType",
                                     "Label": {
                                         "tag": "span",
                                         "text": (el, s) => s.filter?.type
                                     },
                                     "CloseBtn": {
                                         "tag": "button",
-                                        "props": {
-                                            "background": "transparent",
-                                            "border": "none",
-                                            "cursor": "pointer",
-                                            "padding": "0",
-                                            "color": "nodeType",
-                                            "fontSize": "Z1",
-                                            "lineHeight": "1"
-                                        },
+                                        "background": "transparent",
+                                        "border": "none",
+                                        "cursor": "pointer",
+                                        "padding": "0",
+                                        "color": "nodeType",
+                                        "fontSize": "Z1",
+                                        "lineHeight": "1",
                                         "text": "×",
-                                        "on": {
-                                            "click": (ev, el, s) => {
-                                                const f = { ...s.filter }
-                                                delete f.type
-                                                s.update({ filter: Object.keys(f).length ? f : null })
-                                                setTimeout(() => window.dispatchEvent(new Event('resize')), 50)
-                                            }
+                                        "onClick": (ev, el, s) => {
+                                            const f = { ...s.filter }
+                                            delete f.type
+                                            s.update({ filter: Object.keys(f).length ? f : null })
+                                            setTimeout(() => window.dispatchEvent(new Event('resize')), 50)
                                         }
                                     }
                                 },
                                 "EnvTag": {
                                     "if": (el, s) => s.filter?.env,
-                                    "extend": "Flex",
-                                    "props": {
-                                        "flexAlign": "center",
-                                        "gap": "X2",
-                                        "padding": "X2 Z",
-                                        "background": "env .2",
-                                        "round": "Z",
-                                        "fontSize": "Z1",
-                                        "color": "env"
-                                    },
+                                    "extends": "Flex",
+                                    "flexAlign": "center",
+                                    "gap": "X2",
+                                    "padding": "X2 Z",
+                                    "background": "env .2",
+                                    "round": "Z",
+                                    "fontSize": "Z1",
+                                    "color": "env",
                                     "Label": {
                                         "tag": "span",
                                         "text": (el, s) => s.filter?.env
                                     },
                                     "CloseBtn": {
                                         "tag": "button",
-                                        "props": {
-                                            "background": "transparent",
-                                            "border": "none",
-                                            "cursor": "pointer",
-                                            "padding": "0",
-                                            "color": "env",
-                                            "fontSize": "Z1",
-                                            "lineHeight": "1"
-                                        },
+                                        "background": "transparent",
+                                        "border": "none",
+                                        "cursor": "pointer",
+                                        "padding": "0",
+                                        "color": "env",
+                                        "fontSize": "Z1",
+                                        "lineHeight": "1",
                                         "text": "×",
-                                        "on": {
-                                            "click": (ev, el, s) => {
-                                                const f = { ...s.filter }
-                                                delete f.env
-                                                s.update({ filter: Object.keys(f).length ? f : null })
-                                                setTimeout(() => window.dispatchEvent(new Event('resize')), 50)
-                                            }
+                                        "onClick": (ev, el, s) => {
+                                            const f = { ...s.filter }
+                                            delete f.env
+                                            s.update({ filter: Object.keys(f).length ? f : null })
+                                            setTimeout(() => window.dispatchEvent(new Event('resize')), 50)
                                         }
                                     }
                                 },
                                 "CloudTag": {
                                     "if": (el, s) => s.filter?.cloud,
-                                    "extend": "Flex",
-                                    "props": {
-                                        "flexAlign": "center",
-                                        "gap": "X2",
-                                        "padding": "X2 Z",
-                                        "background": "cloudProvider .2",
-                                        "round": "Z",
-                                        "fontSize": "Z1",
-                                        "color": "cloudProvider"
-                                    },
+                                    "extends": "Flex",
+                                    "flexAlign": "center",
+                                    "gap": "X2",
+                                    "padding": "X2 Z",
+                                    "background": "cloudProvider .2",
+                                    "round": "Z",
+                                    "fontSize": "Z1",
+                                    "color": "cloudProvider",
                                     "Label": {
                                         "tag": "span",
                                         "text": (el, s) => s.filter?.cloud
                                     },
                                     "CloseBtn": {
                                         "tag": "button",
-                                        "props": {
-                                            "background": "transparent",
-                                            "border": "none",
-                                            "cursor": "pointer",
-                                            "padding": "0",
-                                            "color": "cloudProvider",
-                                            "fontSize": "Z1",
-                                            "lineHeight": "1"
-                                        },
+                                        "background": "transparent",
+                                        "border": "none",
+                                        "cursor": "pointer",
+                                        "padding": "0",
+                                        "color": "cloudProvider",
+                                        "fontSize": "Z1",
+                                        "lineHeight": "1",
                                         "text": "×",
-                                        "on": {
-                                            "click": (ev, el, s) => {
-                                                const f = { ...s.filter }
-                                                delete f.cloud
-                                                s.update({ filter: Object.keys(f).length ? f : null })
-                                                setTimeout(() => window.dispatchEvent(new Event('resize')), 50)
-                                            }
+                                        "onClick": (ev, el, s) => {
+                                            const f = { ...s.filter }
+                                            delete f.cloud
+                                            s.update({ filter: Object.keys(f).length ? f : null })
+                                            setTimeout(() => window.dispatchEvent(new Event('resize')), 50)
                                         }
                                     }
                                 },
                                 "RewardClaimTag": {
                                     "if": (el, s) => s.filter?.rewardClaim,
-                                    "extend": "Flex",
-                                    "props": {
-                                        "flexAlign": "center",
-                                        "gap": "X2",
-                                        "padding": "X2 Z",
-                                        "background": "rewardClaim .2",
-                                        "round": "Z",
-                                        "fontSize": "Z1",
-                                        "color": "rewardClaim"
-                                    },
+                                    "extends": "Flex",
+                                    "flexAlign": "center",
+                                    "gap": "X2",
+                                    "padding": "X2 Z",
+                                    "background": "rewardClaim .2",
+                                    "round": "Z",
+                                    "fontSize": "Z1",
+                                    "color": "rewardClaim",
                                     "Label": {
                                         "tag": "span",
                                         "text": (el, s) => s.filter?.rewardClaim
                                     },
                                     "CloseBtn": {
                                         "tag": "button",
-                                        "props": {
-                                            "background": "transparent",
-                                            "border": "none",
-                                            "cursor": "pointer",
-                                            "padding": "0",
-                                            "color": "rewardClaim",
-                                            "fontSize": "Z1",
-                                            "lineHeight": "1"
-                                        },
+                                        "background": "transparent",
+                                        "border": "none",
+                                        "cursor": "pointer",
+                                        "padding": "0",
+                                        "color": "rewardClaim",
+                                        "fontSize": "Z1",
+                                        "lineHeight": "1",
                                         "text": "×",
-                                        "on": {
-                                            "click": (ev, el, s) => {
-                                                const f = { ...s.filter }
-                                                delete f.rewardClaim
-                                                s.update({ filter: Object.keys(f).length ? f : null })
-                                                setTimeout(() => window.dispatchEvent(new Event('resize')), 50)
-                                            }
+                                        "onClick": (ev, el, s) => {
+                                            const f = { ...s.filter }
+                                            delete f.rewardClaim
+                                            s.update({ filter: Object.keys(f).length ? f : null })
+                                            setTimeout(() => window.dispatchEvent(new Event('resize')), 50)
                                         }
                                     }
                                 },
                                 "ClearAllBtn": {
                                     "tag": "button",
-                                    "props": {
-                                        "background": "transparent",
-                                        "border": "none",
-                                        "cursor": "pointer",
-                                        "padding": "X2 Z",
-                                        "color": "caption",
-                                        "fontSize": "Z1",
-                                        ":hover": {
-                                            "color": "white"
-                                        }
+                                    "background": "transparent",
+                                    "border": "none",
+                                    "cursor": "pointer",
+                                    "padding": "X2 Z",
+                                    "color": "caption",
+                                    "fontSize": "Z1",
+                                    ":hover": {
+                                        "color": "white"
                                     },
                                     "text": "Clear all",
-                                    "on": {
-                                        "click": (ev, el, s) => {
-                                            s.update({ filter: null })
-                                            setTimeout(() => window.dispatchEvent(new Event('resize')), 50)
-                                        }
+                                    "onClick": (ev, el, s) => {
+                                        s.update({ filter: null })
+                                        setTimeout(() => window.dispatchEvent(new Event('resize')), 50)
                                     }
                                 }
                             },

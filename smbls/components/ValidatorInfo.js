@@ -1,5 +1,5 @@
 export const ValidatorInfo = {
-  extend: 'Flex',
+  extends: 'Flex',
   props: (el, s) => ({
       flexFlow: 'y',
       gap: 'C1',

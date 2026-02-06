@@ -1,9 +1,9 @@
 export const Filters = {
-  extend: 'Flex',
+  extends: 'Flex',
   props: {
     gap: 'D1',
   },
-  childExtend: 'FiltersSection',
+  childExtends: 'FiltersSection',
   Env: {
     key: 'Environment',
     options: [
