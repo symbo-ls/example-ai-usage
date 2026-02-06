@@ -1,6 +1,6 @@
-'use strict'
+"use strict";
 
-import { create } from 'smbls'
-import * as app from './smbls'
+import { create } from "smbls";
+import * as app from "./smbls/index.js";
 
-create({}, app)
+create({}, app);

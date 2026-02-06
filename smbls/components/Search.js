@@ -17,8 +17,7 @@ export const Search = {
     minWidth: "G1",
   },
   onClick: () => {
-    const ninja = document.querySelector("ninja-keys");
-    if (ninja) ninja.open();
+    // Ninja-keys removed - was: const ninja = document.querySelector("ninja-keys"); if (ninja) ninja.open();
   },
   Icon: {
     icon: "search",
