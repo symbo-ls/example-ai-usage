@@ -270,5 +270,4 @@ export const addNetwork = {
       theme: 'primary',
       type: 'submit',
     },
-  },
 };

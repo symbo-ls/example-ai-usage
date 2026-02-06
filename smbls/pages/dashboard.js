@@ -326,5 +326,4 @@ export const dashboard = {
                     "minWidth": "G3"
                 }
             }
-        }
 };

@@ -14,7 +14,7 @@
     "fuse.js": "^7.1.0",
     "lit": "^3.1.0",
     "ninja-keys": "^1.2.2",
-    "smbls": "v2.33.36"
+    "smbls": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",

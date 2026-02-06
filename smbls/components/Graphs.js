@@ -50,35 +50,29 @@ export const Graphs = {
         });
     },
   },
-  props: (el, s) => {
+  gap: "A",
+  flow: "y",
+  padding: "A",
+  round: "A",
+  background: "black .3",
+  onInit: (el, s) => {
     // Fetch metrics once when protocol and public_key are available
     if (!el.__metricsFetched && s.protocol && s.public_key) {
       el.__metricsFetched = true;
       el.scope.fetchMetrics(el, s, s.timeRangeMinutes || 5);
     }
-
-    return {
-      gap: "A",
-      flow: "y",
-      padding: "A",
-      round: "A",
-      background: "black .3",
-    };
   },
-
-  on: {
-    stateChanged: (el, s, changes) => {
-      if (changes.timeRangeMinutes) {
-        // Destroy existing charts before refetch
-        el.queryAll("canvas").forEach((canvas) => {
-          if (canvas.node.__chart) {
-            canvas.node.__chart.destroy();
-            canvas.node.__chart = null;
-          }
-        });
-        el.scope.fetchMetrics(el, s, s.timeRangeMinutes);
-      }
-    },
+  onStateChanged: (el, s, changes) => {
+    if (changes.timeRangeMinutes) {
+      // Destroy existing charts before refetch
+      el.queryAll("canvas").forEach((canvas) => {
+        if (canvas.node.__chart) {
+          canvas.node.__chart.destroy();
+          canvas.node.__chart = null;
+        }
+      });
+      el.scope.fetchMetrics(el, s, s.timeRangeMinutes);
+    }
   },
 
   Header: {
