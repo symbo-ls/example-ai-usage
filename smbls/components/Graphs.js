@@ -1,124 +1,131 @@
-import { fetch as apiFetch } from '../functions/fetch.js'
-import { PeerCountChart } from './PeerCountChart.js'
-import { LatestBlockChart } from './LatestBlockChart.js'
-import { SyncingChart } from './SyncingChart.js'
-import { BlocksToSyncChart } from './BlocksToSyncChart.js'
-import { NetListeningChart } from './NetListeningChart.js'
-import { UpChart } from './UpChart.js'
-
-// Time range options in minutes
-const TIME_RANGES = [
-  { label: '5m', value: 5 },
-  { label: '15m', value: 15 },
-  { label: '30m', value: 30 },
-  { label: '1h', value: 60 },
-  { label: '6h', value: 360 },
-  { label: '12h', value: 720 },
-  { label: '1d', value: 1440 },
-  { label: '3d', value: 4320 },
-  { label: '1w', value: 10080 },
-]
-
-// Fetch metrics from the API with Chart.js format
-const fetchMetrics = (s, timeRange) => {
-  const networkName = (s.protocol || '').toLowerCase()
-  const publicKey = s.public_key || ''
-
-  if (!networkName || !publicKey) return
-
-  s.update({ metricsLoading: true })
-
-  apiFetch('POST', '', {
-    networkName,
-    publicKey,
-    timeRangeMinutes: timeRange || 5,
-  }, {
-    route: '/api/metrics',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Format': 'chartjs'
-    }
-  })
-    .then(data => {
-      if (data?.success) {
-        s.update({ metricsData: data, metricsLoading: false })
-      } else {
-        s.update({ metricsLoading: false })
-      }
-    })
-    .catch(err => {
-      console.error('Failed to fetch metrics:', err)
-      s.update({ metricsLoading: false })
-    })
-}
+import { fetch as apiFetch } from "../functions/fetch.js";
+import { PeerCountChart } from "./PeerCountChart.js";
+import { LatestBlockChart } from "./LatestBlockChart.js";
+import { SyncingChart } from "./SyncingChart.js";
+import { BlocksToSyncChart } from "./BlocksToSyncChart.js";
+import { NetListeningChart } from "./NetListeningChart.js";
+import { UpChart } from "./UpChart.js";
 
 export const Graphs = {
-  extend: 'Flex',
+  extend: "Flex",
+  scope: {
+    TIME_RANGES: [
+      { label: "5m", value: 5 },
+      { label: "15m", value: 15 },
+      { label: "30m", value: 30 },
+      { label: "1h", value: 60 },
+      { label: "6h", value: 360 },
+      { label: "12h", value: 720 },
+      { label: "1d", value: 1440 },
+      { label: "3d", value: 4320 },
+      { label: "1w", value: 10080 },
+    ],
+    fetchMetrics: (s, timeRange) => {
+      const networkName = (s.protocol || "").toLowerCase();
+      const publicKey = s.public_key || "";
+
+      if (!networkName || !publicKey) return;
+
+      s.update({ metricsLoading: true });
+
+      apiFetch(
+        "POST",
+        "",
+        {
+          networkName,
+          publicKey,
+          timeRangeMinutes: timeRange || 5,
+        },
+        {
+          route: "/api/metrics",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Format": "chartjs",
+          },
+        },
+      )
+        .then((data) => {
+          if (data?.success) {
+            s.update({ metricsData: data, metricsLoading: false });
+          } else {
+            s.update({ metricsLoading: false });
+          }
+        })
+        .catch((err) => {
+          console.error("Failed to fetch metrics:", err);
+          s.update({ metricsLoading: false });
+        });
+    },
+  },
   props: (el, s) => {
     // Fetch metrics once when protocol and public_key are available
     if (!el.__metricsFetched && s.protocol && s.public_key) {
-      el.__metricsFetched = true
-      fetchMetrics(s, s.timeRangeMinutes || 5)
+      el.__metricsFetched = true;
+      el.scope.fetchMetrics(s, s.timeRangeMinutes || 5);
     }
 
     return {
-      gap: 'A',
-      flow: 'y',
-      padding: 'A',
-      round: 'A',
-      background: 'black .3',
-    }
+      gap: "A",
+      flow: "y",
+      padding: "A",
+      round: "A",
+      background: "black .3",
+    };
   },
 
   on: {
     stateChanged: (el, s, changes) => {
       if (changes.timeRangeMinutes) {
         // Destroy existing charts before refetch
-        el.queryAll('canvas').forEach(canvas => {
+        el.queryAll("canvas").forEach((canvas) => {
           if (canvas.node.__chart) {
-            canvas.node.__chart.destroy()
-            canvas.node.__chart = null
+            canvas.node.__chart.destroy();
+            canvas.node.__chart = null;
           }
-        })
-        fetchMetrics(s, s.timeRangeMinutes)
+        });
+        el.scope.fetchMetrics(s, s.timeRangeMinutes);
       }
     },
   },
 
   Header: {
-    extends: 'Flex',
-    flow: 'x',
-    flexAlign: 'center space-between',
-    gap: 'A',
-    margin: '0 0 Y 0',
+    extends: "Flex",
+    flow: "x",
+    flexAlign: "center space-between",
+    gap: "A",
+    margin: "0 0 Y 0",
 
     Title: {
-      fontSize: 'Z',
-      fontWeight: '600',
-      color: 'caption',
-      textTransform: 'uppercase',
-      text: 'Metrics',
+      fontSize: "Z",
+      fontWeight: "600",
+      color: "caption",
+      textTransform: "uppercase",
+      text: "Metrics",
     },
 
     TimeRange: {
-      extends: 'Flex',
-      flow: 'x',
-      gap: 'X',
-      flexWrap: 'wrap',
-      children: () => TIME_RANGES,
-      childrenAs: 'state',
+      extends: "Flex",
+      flow: "x",
+      gap: "X",
+      flexWrap: "wrap",
+      children: (el) => el.scope.TIME_RANGES,
+      childrenAs: "state",
       childProps: (el, s) => ({
-        tag: 'button',
-        padding: 'X Y',
-        round: 'Y',
-        border: 'none',
-        cursor: 'pointer',
-        fontSize: 'Y1',
+        tag: "button",
+        padding: "X Y",
+        round: "Y",
+        border: "none",
+        cursor: "pointer",
+        fontSize: "Y1",
         text: s.label,
-        background: (s.parent?.timeRangeMinutes || 5) === s.value ? 'white .2' : 'transparent',
-        color: (s.parent?.timeRangeMinutes || 5) === s.value ? 'white' : 'caption',
+        background:
+          (s.parent?.timeRangeMinutes || 5) === s.value
+            ? "white .2"
+            : "transparent",
+        color:
+          (s.parent?.timeRangeMinutes || 5) === s.value ? "white" : "caption",
         onClick: () => {
-          s.parent.update({ timeRangeMinutes: s.value })
+          s.parent.update({ timeRangeMinutes: s.value });
         },
       }),
     },
@@ -126,47 +133,47 @@ export const Graphs = {
 
   Loading: {
     if: (_, s) => s.metricsLoading,
-    text: 'Loading metrics...',
-    color: 'caption',
-    fontSize: 'Z',
+    text: "Loading metrics...",
+    color: "caption",
+    fontSize: "Z",
   },
 
   NoData: {
     if: (_, s) => !s.metricsLoading && !s.metricsData?.charts,
-    text: 'No metrics data available',
-    color: 'caption',
-    fontSize: 'Z',
+    text: "No metrics data available",
+    color: "caption",
+    fontSize: "Z",
   },
 
   // Uptime grid - full width (first)
-  UpChart: { extend: UpChart, props: { order: '1' } },
+  UpChart: { extend: UpChart, props: { order: "1" } },
 
   // Row 1: Latest Block, Syncing, and Blocks To Sync
   Row1: {
     if: (_, s) => s.metricsData?.charts,
-    extend: 'Flex',
+    extend: "Flex",
     props: {
-      flow: 'x',
-      gap: 'A',
-      order: '2',
+      flow: "x",
+      gap: "A",
+      order: "2",
     },
 
-    LatestBlockChart: { extend: LatestBlockChart, props: { flex: '1' } },
-    SyncingChart: { extend: SyncingChart, props: { flex: '1' } },
-    BlocksToSyncChart: { extend: BlocksToSyncChart, props: { flex: '1' } },
+    LatestBlockChart: { extend: LatestBlockChart, props: { flex: "1" } },
+    SyncingChart: { extend: SyncingChart, props: { flex: "1" } },
+    BlocksToSyncChart: { extend: BlocksToSyncChart, props: { flex: "1" } },
   },
 
   // Row 2: Peer Count and Net Listening
   Row2: {
     if: (_, s) => s.metricsData?.charts,
-    extend: 'Flex',
+    extend: "Flex",
     props: {
-      flow: 'x',
-      gap: 'A',
-      order: '3',
+      flow: "x",
+      gap: "A",
+      order: "3",
     },
 
-    PeerCountChart: { extend: PeerCountChart, props: { flex: '1' } },
-    NetListeningChart: { extend: NetListeningChart, props: { flex: '1' } },
+    PeerCountChart: { extend: PeerCountChart, props: { flex: "1" } },
+    NetListeningChart: { extend: NetListeningChart, props: { flex: "1" } },
   },
-}
+};
