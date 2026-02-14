@@ -69,4 +69,10 @@ export default {
   "line-highlight": ["--gray13 1 +4", "--gray2 1 +16"],
   blue2: "#4676EC",
   lightBlue: "#6899D1",
+  tinderPink: "#FF4B6E",
+  tinderGold: "#FFD700",
+  tinderBlue: "#3B82F6",
+  tinderGreen: "#10B981",
+  tinderRed: "#EF4444",
+  tinderPurple: "#8B5CF6",
 };

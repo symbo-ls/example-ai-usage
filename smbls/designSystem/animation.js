@@ -252,4 +252,58 @@ export default {
       opacity: 1,
     },
   },
+  swipeRight: {
+    from: {
+      transform: "translateX(0) rotate(0deg)",
+      opacity: 1,
+    },
+    to: {
+      transform: "translateX(150%) rotate(30deg)",
+      opacity: 0,
+    },
+  },
+  swipeLeft: {
+    from: {
+      transform: "translateX(0) rotate(0deg)",
+      opacity: 1,
+    },
+    to: {
+      transform: "translateX(-150%) rotate(-30deg)",
+      opacity: 0,
+    },
+  },
+  swipeUp: {
+    from: {
+      transform: "translateY(0) scale(1)",
+      opacity: 1,
+    },
+    to: {
+      transform: "translateY(-150%) scale(0.8)",
+      opacity: 0,
+    },
+  },
+  cardStackIn: {
+    from: {
+      transform: "scale(0.9) translateY(30px)",
+      opacity: 0,
+    },
+    to: {
+      transform: "scale(1) translateY(0)",
+      opacity: 1,
+    },
+  },
+  pulseGlow: {
+    "0%": {
+      transform: "scale(1)",
+      boxShadow: "0 0 0 0 rgba(255, 75, 110, 0.4)",
+    },
+    "70%": {
+      transform: "scale(1.05)",
+      boxShadow: "0 0 0 15px rgba(255, 75, 110, 0)",
+    },
+    "100%": {
+      transform: "scale(1)",
+      boxShadow: "0 0 0 0 rgba(255, 75, 110, 0)",
+    },
+  },
 };

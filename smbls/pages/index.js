@@ -8,6 +8,7 @@ import { editNetwork } from './edit-network';
 import { editNode } from './edit-node';
 import { dashboard } from './dashboard';
 import { addNetworkCopy } from './add-network-copy';
+import { tinder } from './tinder';
 export default {
       '/': main,
 '/network': network,
@@ -19,5 +20,6 @@ export default {
 '/edit-node': editNode,
 '/dashboard': dashboard,
 '/add-network-copy': addNetworkCopy,
+'/tinder': tinder,
 
     }
