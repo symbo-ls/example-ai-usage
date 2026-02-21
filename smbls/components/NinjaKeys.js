@@ -1,4 +1,4 @@
-import files from "../files.js";
+import files from '../files.js';
 
 const NINJA_STYLES = `
   position: fixed;

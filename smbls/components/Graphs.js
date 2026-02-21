@@ -131,32 +131,4 @@ export const Graphs = {
     color: "caption",
     fontSize: "Z",
   },
-
-  // Uptime grid - full width (first)
-  UpChart: { order: "1" },
-
-  // Row 1: Latest Block, Syncing, and Blocks To Sync
-  Row1: {
-    if: (_, s) => s.metricsData?.charts,
-    extends: "Flex",
-    flow: "x",
-    gap: "A",
-    order: "2",
-
-    LatestBlockChart: { flex: "1" },
-    SyncingChart: { flex: "1" },
-    BlocksToSyncChart: { flex: "1" },
-  },
-
-  // Row 2: Peer Count and Net Listening
-  Row2: {
-    if: (_, s) => s.metricsData?.charts,
-    extends: "Flex",
-    flow: "x",
-    gap: "A",
-    order: "3",
-
-    PeerCountChart: { flex: "1" },
-    NetListeningChart: { flex: "1" },
-  },
 };

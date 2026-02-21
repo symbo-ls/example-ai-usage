@@ -1,12 +1,26 @@
 <html background="#000">
-<head>
-  <title>Documents</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <head>
+    <title>Documents</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta charset="UTF-8" />
 
-  <meta charset="UTF-8">
-</head>
-<body>
-  <script type="module" src="./index.js"></script>
-</body>
+    <!-- Import Map for External Dependencies -->
+    <script type="importmap">
+      {
+        "imports": {
+          "smbls": "https://cdn.skypack.dev/smbls@latest",
+          "@domql/utils": "https://cdn.skypack.dev/@domql/utils@latest",
+          "@symbo.ls/utils": "https://cdn.skypack.dev/@symbo.ls/utils@latest",
+          "@symbo.ls/scratch": "https://cdn.skypack.dev/@symbo.ls/scratch@latest"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <script type="module" src="./index.js"></script>
+  </body>
 </html>
